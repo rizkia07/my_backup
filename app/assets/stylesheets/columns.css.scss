@@ -1,0 +1,378 @@
+// Place all the styles related to the columns controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$row_height: 44px;
+$bg_check: #f5f4f2;
+$bg_uncheck: #e6e3de;
+$bg_highlight: rgb(247,239,219);
+$row_border: #ccc;
+
+#columns {
+
+background: $bg_uncheck;
+overflow: hidden;
+min-height: 400px;
+
+// remove spaces
+padding-top: 40px;
+
+@media (max-width: 480px) {
+  padding-top: 0;
+}
+@media (max-width: 979px) {
+  padding-top: 0;
+}
+
+.navbar-fixed-top {
+  margin-bottom: 0;
+  margin-left: 0;
+}
+.container.main {
+  margin-left: 0;
+  width: 100%;
+}
+padding-left: 0;
+
+@media (min-width: 768px) {
+  .container.main {
+    margin-left: 20px;
+  }
+}
+
+// reset
+a {
+  outline: none;
+}
+
+.navbar {
+  .title {
+    color: white;
+  }
+
+  .add {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+  }
+}
+
+.columns_wrapper {
+  overflow: scroll;
+}
+
+.columns {
+
+  .column {
+    margin-left: 0;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-left: -1px;
+
+    li.cell {
+      height: $row_height;
+      line-height: $row_height;
+      overflow: hidden;
+      background: $bg_uncheck;
+
+      border-bottom: 1px solid $row_border;
+      border-left: 1px solid $row_border;
+      border-right: 1px solid $row_border;
+
+      -moz-transition: height 0.2s ease-in-out;
+      -webkit-transition: height 0.2s ease-in-out;
+
+      position: relative;
+
+      a {
+        display: block;
+        float: left; /* clearfix */
+        text-decoration: none;
+        color: #666;
+      }
+
+      a.check {
+      }
+
+      a.link,
+      a.word {
+        text-indent: 0.5em;
+        width: 70%;
+      }
+        
+      a.link {
+        color: blue;
+        text-decoration: underline;
+      }        
+
+      a.more {
+        display: none;
+        opacity: 0.3;
+        position: absolute;
+        right: 10px;
+      }
+      a.more:hover {
+        opacity: 0.7;
+      }
+
+      div.buttons {
+        clear: left;
+        padding: 0 10px;
+        //background: transparent;
+        text-align: right; 
+        line-height: 16px;
+        
+        a {
+          display: inline;
+          float: none;
+          opacity: 0.3;
+        }
+        a:hover {
+          opacity: 0.7;
+        }
+
+      }
+    }
+
+    li.checked {
+      background: $bg_check;
+    }
+
+    li.current {
+      background: $bg_highlight;
+    }
+
+    li:hover {
+      background: $bg_highlight;
+
+      a.more {
+        display: inline;
+      }
+    }
+
+    li.add,
+    li.put {
+      text-align: center;
+      height: $row_height !important;
+      line-height: $row_height !important;
+      border-left: 1px solid $row_border;
+      border-right: 1px solid $row_border;
+      border-bottom: 1px solid $row_border;
+    }
+
+    li.put {
+      opacity: 0;
+      -moz-transition: opacity 0.2s ease-in-out;
+      -webkit-transition: opacity 0.2s ease-in-out;
+    }
+
+    li.header {
+      background: url(/assets/columns/topic_path_gradation_1.png);
+      color: #666;
+      padding: 0 1em; 
+      overflow: hidden;
+      height: 30px !important;
+      line-height: 30px !important;
+
+      border-left: 1px solid $row_border;
+      border-right: 1px solid $row_border;
+    }
+
+    li.more {
+      height: 70px;
+    }
+
+    li:hover {
+      -moz-transition-delay: 0.5s;
+      -webkit-transition-delay: 0.5s;
+
+      height: 70px;
+    }
+
+    li.contents {
+      height: 135px;
+      background: #555;
+      overflow: hidden;
+
+      margin-left: 1px;
+      border-left: 1px solid $row_border;
+
+      ul {
+        width: 100%;
+        height: 110px;
+
+
+        li.content {
+          display: none;
+          height: 100%;
+          padding: 7px;
+          overflow: auto;
+          line-height: 1.5;
+          background: transparent; 
+          color: #eee;
+          border: none;
+
+          .edit_form {
+            text-align: center;
+            position: relative;
+              
+            textarea.content {
+              height: 85px;
+              width: 100%;
+              resize: none;
+              background-color: transparent;
+              border: none;
+              box-shadow: none;
+              color: #eee;
+              padding: 0;
+            }
+            .btn {
+              position: absolute;
+              right: 0;
+              bottom: 0;
+            }
+            .count {
+              position: absolute;
+              right: 0;
+              top: 0;
+              background: #fff;
+              opacity: 0.8;
+              padding: 0 0.5em; 
+              font-weight: bold;
+              color: #000;
+              visibility: hidden;
+            }
+            .count.focus {
+              visibility: visible;
+            }
+          }
+          .edit_form.over {
+            .count {
+              color: red;
+            }
+          }
+
+       }
+        li.content.current {
+          display: block;
+        }
+      }
+      div.buttons {
+        height: 25px;
+        background: #fff;
+        opacity: 0.7;
+        width: 100%;
+        //display: none;
+
+        margin-top: 25px;
+        -moz-transition: margin-top 0.2s ease-in-out;
+        -webkit-transition: margin-top 0.2s ease-in-out;
+
+        line-height: 25px;
+        a.arrow {
+          line-height: 25px;
+          margin: 0 4px;
+        }
+        a.arrow.left {
+          float:left;
+        }
+        a.arrow.right {
+          float:right;
+        }
+
+        div.fav {
+          width: 50%;
+          margin: auto;
+          text-align: center;
+          display: none;
+        }
+
+        div.fav.current {
+          display: block;
+        }
+
+      }
+    }
+
+    li.contents:hover {
+      div.buttons {
+        //display: block;
+
+        -moz-transition-delay: 0.3s;
+        -webkit-transition-delay: 0.3s;
+
+        margin-top: 0;
+      }
+    }
+
+  } // ul
+
+  .search_column {
+    li.cell {
+      height: $row_height !important;
+      line-height: $row_height / 2 !important;
+      background: $bg_check !important;
+      color: #666;
+      text-indent: 5px;
+      cursor: pointer;
+      
+      .title {
+        font-size: 16px;
+        line-height: 22px;
+      }
+
+      .parents {
+        font-style: italic;
+        font-size: 12px;
+      }
+    }
+    li.cell:hover {
+      background: $bg_highlight !important;
+    }
+
+ 
+  }
+
+} // .columns
+
+.moving {
+
+  li.put {
+    opacity: 1.0 !important;
+  }
+
+}
+
+.scroll {
+  position: fixed;
+  bottom: 0;
+  border-radius: 5px;
+  background-color: #000;
+  opacity: 0.6;
+  font-size: 15px;
+  font-weight: bold;
+  margin: 10px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: white;
+  z-index: 10;
+}
+
+.scroll:hover {
+  opacity: 0.9;
+}
+.scroll_left {
+  left: 0;
+}
+
+.scroll_right {
+  right: 0;
+}
+
+} // #columns

@@ -1,0 +1,14 @@
+user_1:
+  name: "name_1"
+  twitter_id: 132456490
+  app_token: "app_token"
+  org_id: 123534
+  twitter_secret: "twitter_secret1"
+  lang_id: 2
+user_2:
+  name: "name_2"
+  twitter_id: 1324345460
+  app_token: "app_token"
+  org_id: 12312534
+  twitter_secret: "twitter_secret2"
+  lang_id: 1

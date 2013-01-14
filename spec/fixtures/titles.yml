@@ -1,0 +1,13 @@
+titles_1:
+  id: 161
+	name: "English"
+	is_ng: false
+	url_id: nil
+	branch_id: 1
+
+titles_2:
+	id: 241 
+	name: "Japanese" 
+	is_ng: false 
+	url_id: nil 
+	branch_id: 2

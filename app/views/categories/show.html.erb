@@ -1,0 +1,87 @@
+<div class="row">
+  <div class="span10">
+    <div class="alert alert-block js-iphone-link">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <h4>
+        <a href="https://itunes.apple.com/jp/app/baton-text-memo-other-people/id540969808?mt=8">
+          <%= image_tag "categories/icon_114.png", :size => "40x40" %>
+        </a>
+        文字入力不要！画面タップだけでネットサーフィン
+      </h4>
+      BatonのiPhoneアプリはこちらから。まだの方は是非お試し下さい。無料です！<br />
+      <a href="https://itunes.apple.com/jp/app/baton-text-memo-other-people/id540969808?mt=8">https://itunes.apple.com/jp/app/baton-text-memo-other-people/id540969808?mt=8</a>
+    </div>
+
+    <h2><%= "#{@title} (#{@leafNum})" %></h2>
+
+    <div class="row">
+      <div class="span10">
+        <%= header_ad %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span10">
+        <% if @contents.present? %>
+        <h3>みんなの声</h3>
+        <ul class="thumbnails">
+          <% @contents.each do |content| %>  
+            <% next if content[:content].blank? %>
+            <li class="span3">
+              <div class="thumbnail">
+                <p><%= content[:content] %></p>
+              </div>
+            </li>
+          <% end %>  
+        </ul>
+        <% end %>  
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span10">
+        <h3>カテゴリー</h3>
+      </div>
+
+      <% if @categories.present? %>
+        <% mid = (@categories.count / 2).ceil %>
+
+        <div class="span5">
+          <ul class="nav nav-tabs nav-stacked">
+            <% @categories[0..mid - 1].each do |child| %>
+              <li>
+                <% if child[:url_name] %>
+                  <%= image_tag('/assets/categories/search_category_link@2x.png', :size => '16x16', :class => "icon") %>
+                <% else %>
+                  <%= image_tag('/assets/categories/search_category@2x.png', :size => '16x16', :class => "icon") %>
+                <% end %>
+                <%= link_to child[:url_name] || child[:title], child[:url_name] ? child[:title] : { :action => :show, :id => child[:branch_id] } %>
+                <span class="leaf_num">(<%= child[:leaf_num] %>)</span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+        <% if mid > 0 %>
+        <div class="span5">
+          <ul class="nav nav-tabs nav-stacked">
+            <% @categories[mid..@categories.count - 1].each do |child| %>
+              <li>
+                <% if child[:url_name] %>
+                  <%= image_tag('/assets/categories/search_category_link@2x.png', :size => '16x16', :class => "icon") %>
+                <% else %>
+                  <%= image_tag('/assets/categories/search_category@2x.png', :size => '16x16', :class => "icon") %>
+                <% end %>
+                <%= link_to child[:url_name] || child[:title], child[:url_name] ? child[:title] : { :action => :show, :id => child[:branch_id] } %>
+                <span class="leaf_num">(<%= child[:leaf_num] %>)</span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+
+      <% end %>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+</head>
+
+<body id="news">
+
+<div class="container">
+
+  <h1>News Management</h1>
+
+  <p>
+    <label><input type="radio" name="lang" value="1" />英語</label>
+    <label><input type="radio" name="lang" value="2" checked />日本語</label>
+  </p>
+
+  <div class="row">
+
+    <div class="span4">
+      <h2>Search Word</h2>
+      <form action="#" id="search_form">
+      <p>
+      <input type="text" id="search_query" placeholder="Title" required>
+      <input type="submit" />
+      </p>
+      <pre id="search_result"></pre>
+      </form>
+    </div>
+
+    <div class="span4">
+      <h2>Add Topics</h2>
+      <form action="#" id="topic_form">
+      <p>
+      <input type="text" name="branch_id" placeholder="Branch ID" required>
+      <input type="submit" />
+      </p>
+      <pre id="topic_result"></pre>
+      </form>
+    </div>
+
+    <div class="span4">
+      <h2>Add Notifications</h2>
+      <form action="#" id="notification_form">
+      <p>
+      <input type="text" name="title" placeholder="Title" required>
+      <textarea name="body" required></textarea>
+      <input type="text" name="branch_id" placeholder="Branch ID">
+      </p>
+      <p>
+      <input type="submit" />
+      </p>
+      <pre id="notification_result"></pre>
+      </form>
+    </div>
+
+
+  </div>
+
+  </div>
+
+<%= javascript_include_tag "jquery" %>
+<%= javascript_include_tag "jquery_ujs" %>
+<%= javascript_include_tag "news" %>
+
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+branch_1:
+	id: 1
+	title_id: 161
+	parent_id: 0
+	leaf_num: 1
+	user_id: nil
+	parent_num: 1
+	child_num: 1195
+	content_at: "2012-08-22 00:38:08"
+
+branch_2:
+	id: 2
+	title_id: 241
+	parent_id: 0
+	leaf_num: 2
+	user_id: nil
+	parent_num: 1
+	child_num: 43576
+	content_at: "2012-08-22 00:38:08"

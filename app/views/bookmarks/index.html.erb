@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <h2><span class="js_user_name"></span>さんによるリンク集</h3>
+  <div class="row-fluid">
+
+    <div class="span6 well" id="category">
+      <h3>現在のカテゴリ</h3>
+      <ul class="js_current_categories">
+      </ul>
+      <h3>サブカテゴリを追加</h3>
+      <form class="form-inline js_category_form category_form">
+        <div class="input-append">
+          <input type="text" name="words[title]" class="input-xlarge js_category_field" placeholder="新しいカテゴリ"
+          ><button type="submit" class="btn">追加</button>
+        </div>
+        <input type="hidden" name="words[user_id]" value="<%= @user.id %>" />
+        <input type="hidden" name="words[parent_id]" class="js_category_branch_id" value="<%= @user.id %>" />
+      </form>
+      <h3>既存のサブカテゴリから選択</h3>
+      <ul class="js_suggest_result">
+      </ul>
+    </div>
+
+    <div class="span6 well" id="content">
+      <h3>"<span class="js_content_title"></span>"のコンテンツ</h3>
+      <form class="js_content_form">
+        <div class="control-group">
+          <div class="controls">
+            <textarea name="words[content]" class="input-xlarge js_content_field" rows="5" placeholder="本文"></textarea>
+            <p class="help-block js_content_count">Supporting help text</p>
+          </div>
+        </div>
+        <div class="control-group">
+          <div class="controls">
+            <input type="submit" class="btn" value="保存" />
+            <p class="help-block js_content_message">Supporting help text</p>
+          </div>
+        </div>
+        <input type="hidden" name="_method" value="put" />
+        <input type="hidden" name="words[user_id]" value="<%= @user.id %>" />
+      </form> 
+    </div>
+
+  </div>
+</div>
+
+

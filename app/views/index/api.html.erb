@@ -1,0 +1,232 @@
+<div id="contents"></div>
+
+<script>
+var apis = {
+  reports: {
+    create: {
+      method: "post",
+      url: "/reports",
+      params: {
+        get: {},
+        post: {
+          user_id: ["input", 1],
+          branch_id: ["input", 1],
+        }
+      }
+    }
+  },
+
+  all_data: {
+    index: {
+      method: "get",
+      url: "/all_data?user_id=:user_id",
+      params: {
+        get: {
+          user_id: ["input", 1] 
+        },
+        post: {}
+      }
+    }
+  },
+  titles: {
+    index: {
+      method: "get",
+      url: "/titles",
+      params: {
+        get: {},
+        post: {}
+      }
+    },
+    show: {
+      method: "get",
+      url: "/titles/:name?user_id=:user_id&lang_id=:lang_id",
+      params: {
+        get:{
+          name: ["input", "tree"],
+          lang_id: ["input", 2],
+          user_id: ["input", 1]
+        }
+      }
+    },
+    suggest: {
+      method: "get",
+      url: "/suggests/:name.json",
+      params: {
+        get: {
+          name: ["input", "tree"]
+        },
+        post: {}
+      }
+    }
+  },
+  users: {
+    create: {
+      method: "post",
+      url: "/users",
+      params: {
+        get: {},
+        post: {}
+      }
+    }
+  },
+  branches: {
+    index: {
+      method: "get",
+      url: "/branches",
+      params: {
+        get: {},
+        post: {}
+      }
+    },
+    index_with_user_id: {
+      method: "get",
+      url: "/branches?user_id=:user_id",
+      params: {
+        get: {
+          user_id: ["input", 1] 
+        },
+        post: {}
+      }
+    }
+  },
+  words: {
+    show: {
+      method: "get",
+      url: "/words/:branch_id?user_id=:user_id",
+      params: {
+        get:{
+          branch_id: ["input", 1],
+          user_id: ["input", 1]
+        },
+        post:{}
+      }
+    },
+    create: {
+      method: "post",
+      url: "/words",
+      params: {
+        get: {},
+        post: {
+          user_id: ["input", 1],
+          app_token: ["input", ""],
+          parent_id: ["input", 0],
+          title: ["input", "あたらしいword"],
+          content: ["textarea", "ほんぶんなう"]
+        }
+      }
+    }, 
+    update: {
+      method: "put",
+      url: "/words/:branch_id",
+      params: {
+        get: {
+          branch_id: ["input", 1]
+        },
+        post: {
+          user_id: ["input", 1],
+          parent_id: ["input", 0],
+          //title: ["input", "更新するword"],
+          content: ["textarea", "更新するほんぶんなう"]
+        }
+      }
+    } 
+  },
+  contents: {
+    index: {
+      method: "get",
+      url: "/words/:word_id/contents?user_id=:user_id",
+      params: {
+        get: {
+          word_id: ["input", 2],
+          user_id: ["input", 1]
+        },
+        post: {}
+      }
+    }
+  },
+  favs: {
+    create: {
+      method: "post",
+      url: "/leafs/:leaf_id/favs",
+      params: {
+        get: {
+          leaf_id: ["input", 1]
+        },
+        post: {
+          user_id: ["input", 1],
+        }
+      }
+    }
+  }, 
+  hots: {
+    index: {
+      method: "get",
+      url: "/hots",
+      params: {
+        get: {},
+        post: {}
+      }
+    }
+  }
+};
+
+for(var controller in apis){
+  for(var action in apis[controller]){
+    render(apis[controller][action], controller, action);
+  }
+}
+
+function render(api, controller, action){
+  var unique = api.method + '_' + controller + '_' + action;
+  res = "<h2>" + api.method + " " + api.url + "</h2>";
+  for(var key in api.params.get){
+    res += "<div>" +  key + "</div>";
+    if(api.params.get[key][0] == "input"){
+      res += '<input type="text" id="' + unique + '_' + key + '" value="' + api.params.get[key][1] + '" />';
+    }else if(api.params.get[key][0] == "textarea"){
+      res += '<textarea" id="' + unique + '_' + key + '">' + api.params.get[key][1] + '</textarea>';
+    }
+  }
+
+  for(var key in api.params.post){
+    res += "<div>" +  key + "</div>";
+    if(api.params.post[key][0] == "input"){
+      res += '<input type="text" id="' + unique + '_' + key + '" value="' + api.params.post[key][1] + '" />';
+    }else if(api.params.post[key][0] == "textarea"){
+      res += '<textarea id="' + unique + '_' + key + '">' + api.params.post[key][1] + '</textarea>';
+    }
+  }
+
+
+  res += '<input type="submit" id="' + unique + '_submit" />';
+  res += '<div>res</div>';
+  res += '<hr />';
+  res += '<div id="' + unique + '_res"></div>';
+  $('#contents').append(res)
+
+  $('#' + unique + '_submit').click(function(){
+    var url = api.url;
+    var val = "";
+    var data = {};
+    data[controller] = {}
+    for(var key in api.params.get){
+      val = $('#' + unique + '_'+key).val();
+      url = url.replace(':'+key, val)
+    }
+    for(var key in api.params.post){
+      val = $('#' + unique + '_'+key).val();
+      data[controller][key] = val;
+    }
+    $.ajax({
+      type: api.method,
+      url: url,
+      data:data,
+      success: function(msg){
+        $('#' + unique + '_res').html(JSON.stringify(msg))
+      }
+    });
+  });
+}
+</script>
+<hr />
+<a href="/">demo</a>

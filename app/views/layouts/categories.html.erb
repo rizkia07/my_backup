@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title><%= "#{@title} - " if controller.action_name != 'index' %>Baton</title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body id="categories">
+
+<div class="container">
+  <div class="row">
+    <div class="span9">
+      <h1><%= link_to "Baton", { :action => :index } %></h1>
+    </div>
+    <div class="span3">
+      <%= form_tag url_for(:action => :search), :method => "get", :class => "form-search form-inline" do %>
+        <%= text_field_tag "q", params[:q].to_s, :class => "search-query span2" %>
+      <% end %>
+    </div>
+    <div class="span12">
+	    <%= alerts %>
+      <ul class="breadcrumb">
+        <% if @parents.present? %>
+          <li><%= link_to "ホーム", { :action => :index } %> <span class="divider">/</span></li>
+          <% @parents.each_with_index do |parent, i| %>
+            <% if i < @parents.count - 1 %>
+              <li><%= link_to parent[:url_name] || parent[:title], parent[:url_name] ? parent[:title] : { :action => :show, :id => parent[:branch_id] } %> <span class="divider">/</span></li>
+            <% else %>
+              <li class="active"><%= parent[:url_name] || parent[:title] %></li>
+            <% end %>
+          <% end %>
+        <% else %>
+          <% if controller.action_name == 'index' %>
+            <li class="active">ホーム</li>
+          <% else %>
+            <li><%= link_to "ホーム", { :action => :index } %> <span class="divider">/</span></li>
+            <li class="active"><%= @title %></li>
+          <% end %>
+        <% end %>
+				<% unless user_signed_in? %>
+	        <li style="float: right"><%= link_to image_tag('http://a0.twimg.com/images/dev/buttons/sign-in-with-twitter-l.png', alt: 'Sign in with Twitter'), user_omniauth_authorize_path(:twitter) %></li>
+	      <% else -%>
+	        <li style="float: right"><%= link_to('Logout', logout_path, :method=>'delete') %></li>
+			  <% end -%>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span10">
+
+      <%= yield %>
+
+      <div class="row">
+        <div class="span10">
+          <%= footer_ad %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="span2">
+      <%= side_ad %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="span12 rights">
+      (c) 2012 <a href="http://mindia.jp/">mindia Inc.</a>
+    </div>
+  </div>
+</div>
+
+<%= javascript_include_tag "jquery" %>
+<%= javascript_include_tag "jquery_ujs" %>
+<%= javascript_include_tag "jquery.cookie" %>
+<%= javascript_include_tag "categories" %>
+<%= javascript_include_tag "bootstrap/bootstrap-alert" %>
+
+</body>
+</html>
+

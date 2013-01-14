@@ -1,0 +1,286 @@
+// Place all the styles related to the statics controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#statics {
+
+//body {
+  padding: 0;
+  margin: 0;
+//}
+
+a {
+  outline: none !important;
+  text-decoration: none !important;
+}
+
+.container-fluid {
+  padding: 0;
+}
+
+#main {
+  background: url(baton_web/bg_contents_top.jpg);
+}
+
+#sub {
+  background: url(baton_web/bg_contents_bottom.jpg);
+}
+
+#logo {
+  margin-bottom: 3%;
+  img {
+    max-width: none;
+    width: 100%;
+  }
+}
+
+#catchcopy {
+  text-align: center;
+
+  .list_wrapper {
+    margin-top: 20px;
+    width: 70%;
+    margin: auto;
+    position: relative;
+
+    .list_header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 130px;
+      width: 100%;
+      background-image: url(baton_web/bg_alpha_top.png);
+      z-index: 1;
+    }
+
+    .list_footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 43px;
+      width: 100%;
+      background-image: url(baton_web/bg_alpha_bottom.png);
+      z-index: 1;
+    }
+  }
+
+  ul {
+    margin: 0;
+    margin-bottom: 20px;
+    padding-top: 50px;
+    list-style: none;
+    text-align: left;
+
+    li {
+      position: relative;
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px solid #ececec;
+      font-size: 120% !important;
+
+      a {
+        display: block;
+        color: #777;
+        padding-left: 50px;
+      }
+      i.color {
+        width: 5px;
+        height: 40px;
+        background: #7cf;
+        position: absolute;
+        left: 0px;
+        top: 0;
+      }
+      i.check {
+        background-image: url(baton_web/app/check_on.png);
+        background-position: right center; 
+        background-repeat: no-repeat;
+        width: 40px;
+        height: 40px;
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
+  }
+}
+
+#baton_sub_list {
+  background: #f0f0f0;
+  margin: 0;
+  margin-bottom: 20px;
+  padding-top: 50px;
+  list-style: none;
+  text-align: left;
+
+  li {
+    position: relative;
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid #ececec;
+    font-size: 120% !important;
+
+    a {
+      display: block;
+      color: #777;
+      padding-left: 50px;
+    }
+    i.color {
+      width: 5px;
+      height: 40px;
+      background: #7cf;
+      position: absolute;
+      left: 0px;
+      top: 0;
+    }
+    i.check {
+      background-image: url(baton_web/app/check_on.png);
+      background-position: right center; 
+      background-repeat: no-repeat;
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}
+
+
+#whats {
+  background: url(baton_web/h2_bg.png);
+  height: 60px;
+  text-align: center;
+  h3 {
+    height: 40px;
+    line-height: 40px;
+  }
+}
+
+#features_nav {
+  ul {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    list-style: none;
+    box-shadow: 3px 3px 3px #ccc;
+    border-radius: 10px;
+
+    li {
+      position: relative;
+      height: 40px;
+      line-height: 40px;
+      border-bottom: 1px solid #ececec;
+     
+      a {
+        display: block;
+        background-color: #fff;
+        padding-left: 30px;
+        color: #999;
+      }
+      a:hover {
+        background: #f2f2f2;
+      }
+      a.current {
+        background: #f2f2f2;
+      }
+
+      i.arrow {
+        background-image: url(baton_web/icon_arrow.png);
+        background-position: right center; 
+        background-repeat: no-repeat;
+        width: 16px;
+        height: 40px;
+        display: inline-block;
+        position: absolute;
+        right: 10px;
+        top: 0;
+      }
+    }
+
+    li:first-child {    
+      a {
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+      }
+    }
+
+    li:last-child {    
+      border-bottom: none;
+      a {
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+      }
+    }
+
+  }
+}
+
+#features_content .box {
+    margin-top: 0;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    box-shadow: 3px 3px 3px #ccc;
+    border-radius: 10px;
+    background: #fff;
+    padding: 30px;
+    color: #999;
+
+    p:first-child {
+      margin-top: 0;
+    }
+
+    .content {
+      display: none;
+    }
+    .content.current {
+      display: block;
+    }
+    .content * {
+      font-size: 120% !important;
+    }
+}
+
+#copyright {
+  background: #000;
+}
+
+#device {
+
+  .baton_sub_list_wrapper {
+    .iphone {
+      background: url(baton_web/iphone.png);
+      width: 257px;
+      height: 528px;
+      margin: auto;
+      position: relative;
+    }
+
+    #baton_sub_list {
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      top: 105px;
+      left: 20px;
+      width: 215px;
+      height: 305px;
+    }
+  }
+}
+
+#copyright p {
+  margin: 0;
+  text-align: center;
+  color: #ccc;
+  height: 46px;
+  padding-top: 15px;
+  background: url(baton_web/bg_footer.gif);
+  a {
+    color: #ccc;
+  }
+}
+
+}

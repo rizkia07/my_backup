@@ -1,0 +1,40 @@
+<%
+title = "インターネット"
+#begin
+res = Amazon::Ecs.item_search(title, :country => 'jp', :response_group => "Medium")    
+books = []
+res.items.each do |item|
+  item_attributes = item.get_element('ItemAttributes')
+  url = item.get('DetailPageURL')
+  title = item_attributes.get('Title')
+  author = item_attributes.get_array('Author').join(',')
+  img = item.get('LargeImage/URL')#Small Medium Lerge
+  books.push({
+    url: url,
+    title: title,
+    author: author,
+    img: img
+  })
+end
+books
+@books = books
+
+%>
+<div align="center">
+<div>[PR]</div>
+<% 
+  c = 0
+  @books.each do |book|
+    if book[:img] && c < 10
+      c = c + 1
+%>
+<%= link_to (image_tag book[:img], {:style=>"width:170px; margin:5px;"}), book[:url] %>
+<% 
+    end
+  end
+%>
+</div>
+<%
+#rescue
+#end
+%>

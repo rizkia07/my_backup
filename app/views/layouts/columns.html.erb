@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Baton</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+
+  <%= javascript_tag "var SESSION = #{current_user.to_json};" %>
+  <%= javascript_tag "var USER = #{@user.to_json};" %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body id="columns">
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <form class="navbar-search pull-left js_search_form">
+        <input type="text" class="search-query js_search_field" placeholder="Search">
+      </form>
+
+      <a class="brand js_title title" href="/"></a>
+      <div class="container nav-collapse">
+        <ul class="nav">
+          <!--li><%= link_to '＋', '#', :class => 'add'  %></li-->
+          <li><%= link_to 'Bookmarklet', "javascript:(function(){var q=(document.all)?document.selection.createRange().text:(window.getSelection()+'');if (!q) { q=location.href }location.href = '#{root_url}?add='+encodeURIComponent(q);})()" %></li>
+          <li><%= link_to '|', "#"%></li>
+          <li style="float: right"><%= link_to('Logout', logout_path, :method=>'delete') %></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+
+<div class="container main">
+
+<%= yield %>
+
+</div>
+
+<%= javascript_include_tag "jquery" %>
+<%= javascript_include_tag "jquery_ujs" %>
+<%= javascript_include_tag "spin.min" %>
+<%= javascript_include_tag "async.min" %>
+<%= javascript_include_tag "columns" %>
+
+</body>
+</html>
+

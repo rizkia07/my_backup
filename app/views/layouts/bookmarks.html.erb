@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Baton for links</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_tag "var SESSION = #{current_user.to_json};" %>
+  <%= javascript_tag "var USER = #{@user.to_json};" %>
+
+  <%= javascript_include_tag "jquery" %>
+  <%= javascript_include_tag "jquery_ujs" %>
+  <%= javascript_include_tag "bookmarks" %>
+  <%= csrf_meta_tags %>
+  <link rel="shortcut icon" href="/favicon.ico" />
+</head>
+<body id="bookmarks">
+
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="/">Baton for links</a>
+      <div class="container-fluid nav-collapse">
+        <ul class="nav">
+          <!--li><%= link_to "Add", "/bookmarks"  %></li-->
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+
+<%= yield %>
+
+</body>
+</html>
+

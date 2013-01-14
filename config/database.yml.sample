@@ -1,0 +1,14 @@
+development:
+  adapter: mysql2
+  database: baton_dev
+  host: localhost
+  username: root
+  password: hoge
+
+test:
+  adapter: mysql2
+  database: baton_test
+  host: localhost
+  username: root
+  password: hoge
+

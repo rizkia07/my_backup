@@ -1,0 +1,44 @@
+.content-secondary
+  #jqm-homeheader
+  - if @lang == "ja"
+    %h1#jqm-logo
+    %img{:alt => "baton", :src => "/assets/logo.png"}/
+    %p みんなで広げる知識
+    %p.intro
+      ="「バトン」は誰かの知識に"
+      %br
+      ="自分の知識を加えて広げて"
+      %br
+      ="行くためのiPhoneアプリ。"
+      %video{:controls => "", :autoplay => "", :poster=>"/assets/movie.png", :width=>"100%"}
+        %source{:src=>"/movies/tree.m4v"}
+      %h2 1.興味ある知識をチェック
+      左側のチェックボックスをワンタップすることで保存。
+
+      %h2 2.自分も追加
+      右上の「＋」をタップして自由に追加。
+
+      %h2 3.文章は120文字まで
+      スマホでどんどん読み進められる。
+
+  - else
+    %h1#jqm-logo
+    %img{:alt => "baton", :src => "/assets/logo.png"}/
+    %p a text memo with other people
+    %p.intro
+      ="Baton is a text memo tool."
+      %br
+      ="You can use own memo with the contents from other people."
+      %video{:controls => "", :autoplay => "", :poster=>"/assets/movie.png", :width=>"100%"}
+        %source{:src=>"/movies/tree.m4v"}
+
+      %br
+      Save the contents from other people via one tap
+      %br
+      Save own contents with layered structure
+      %br
+      Change the structure of the contents
+      %br
+      Input sentence within 120 characters
+      %br
+      Vote the contents of other people

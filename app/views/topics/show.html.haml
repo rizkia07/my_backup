@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Branch:
+  = @topic.branch_id
+%p
+  %b Lang:
+  = @topic.lang_id
+
+= link_to 'Edit', edit_topic_path(@topic)
+\|
+= link_to 'Back', topics_path

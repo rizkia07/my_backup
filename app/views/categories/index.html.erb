@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="span10">
+    <h2>注目の話題</h2>
+    <ul class="nav nav-tabs nav-stacked">
+      <% @topics.each do |word| %>
+        <li>
+          <%= image_tag('/assets/categories/search_category@2x.png', :size => '16x16', :class => "icon") %>
+          <%= link_to word.title.name, { :action => :show, :id => word.id } %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="span10">
+  <h2>カテゴリー</h2>
+    <% @categories.each_with_index do |child, i| %>
+      <% if i % 2 == 0 %>
+      <div class="row">
+      <% end %>
+        <div class="span5">
+        <h3>
+          <%= image_tag('/assets/categories/search_category@2x.png', :size => '16x16', :class => "icon") %>
+          <%= link_to child[:url_name] || child[:title], child[:url_name] ? child[:title] : { :action => :show, :id => child[:branch_id] } %>
+        </h3>
+        <ul class="nav nav-pills">
+          <% @children[child[:branch_id]].each do |child| %>
+            <li>
+              <%= link_to "#{child[:url_name] || child[:title]} (#{child[:leaf_num]})", child[:url_name] ? child[:title] : { :action => :show, :id => child[:branch_id] } %>
+            </li>
+          <% end %>
+        </ul>
+        </div>
+      <% if i % 2 == 1 || i == @categories.count - 1 %>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

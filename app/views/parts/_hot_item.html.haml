@@ -1,0 +1,63 @@
+:css
+  td{padding:3px 10px;}
+
+- key = (@data[:lang_id].to_i == 2 ? "ja" : "en") 
+- is_ja = (key == "ja" ? true : false)
+%div{'data-role'=>"collapsible", 'data-theme'=>"b", 'data-content-theme'=>"b", 'data-collapsed'=>"false" }
+  %h3
+    =@part[:titles][key]
+  %table.ui-body.ui-body-a{:style => "padding:10px;font-size:.8em;", :id => "reports"}
+    %tr
+      %th=" "
+      - if is_ja
+        %th="実際"
+        %th="予測"
+      - else
+        %th="Real"
+        %th="Predict"
+    %tr
+      - if is_ja
+        %td="今日"
+      - else
+        %td="Today"
+      %td{:class => "today_#{@part[:key]}"}="#{@part[:data][:today]}"
+      %td{:class => "pre_today_#{@part[:key]}"}="#{@part[:data][:pre_today]}"
+    %tr
+      - if is_ja
+        %td="昨日"
+      - else
+        %td="Yesterday"
+      %td{:class => "yesterday_#{@part[:key]}"}="#{@part[:data][:yesterday]}"
+      %td{:class => "pre_yesterday_#{@part[:key]}"}="#{@part[:data][:pre_yesterday]}"
+    %tr
+      - if is_ja
+        %td="今月"
+      - else
+        %td="This month"
+      %td{:class => "thismonth_#{@part[:key]}"}="#{@part[:data][:thismonth]}"
+      %td{:class => "pre_thismonth_#{@part[:key]}"}="#{@part[:data][:pre_thismonth]}"
+    %tr
+      - if is_ja
+        %td="今年"
+      - else
+        %td="This year"
+      %td{:class => "thisyear_#{@part[:key]}"}="#{@part[:data][:thisyear]}"
+      %td{:class => "pre_thisyear_#{@part[:key]}"}="#{@part[:data][:pre_thisyear]}"
+
+
+:javascript
+  function updt_via_ajax_#{@part[:key]}(){
+    $.get('/hots.json?user_id=#{@user.id}&lang_id=#{@lang_id}&app_token=#{@user.app_token}', function(data){
+      $('.today_#{@part[:key]}').html(data.report_#{@part[:key]}.today); 
+      $('.yesterday_#{@part[:key]}').html(data.report_#{@part[:key]}.yesterday); 
+      $('.thismonth_#{@part[:key]}').html(data.report_#{@part[:key]}.thismonth); 
+      $('.thisyear_#{@part[:key]}').html(data.report_#{@part[:key]}.thisyear); 
+      $('.pre_today_#{@part[:key]}').html(data.report_#{@part[:key]}.pre_today); 
+      $('.pre_yesterday_#{@part[:key]}').html(data.report_#{@part[:key]}.pre_yesterday); 
+      $('.pre_thismonth_#{@part[:key]}').html(data.report_#{@part[:key]}.pre_thismonth); 
+      $('.pre_thisyear_#{@part[:key]}').html(data.report_#{@part[:key]}.pre_thisyear); 
+      setTimeout("updt_via_ajax_#{@part[:key]}()",1000*5);
+    });
+  }
+  //updt_via_ajax_#{@part[:key]}();
+

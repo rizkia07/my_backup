@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %meta{:name=>"viewport", :content=>"width=device-width, minimum-scale=1, maximum-scale=1, user-scalable=no"}
+    %meta{:charset=>"utf-8"}
+    %meta{:name=>"viewport", :content=>"width=device-width, initial-scale=1"}
+    %meta{:name=>"apple-mobile-web-app-capable", :content=>"yes"}
+    %meta{:name=>"apple-mobile-web-app-status-bar-style", :content=>"black"}
+    %title="Baton"
+    %link{:rel=>"stylesheet", :href=>"/jm/css/jquery.mobile-1.1.0.min.css"}
+    %link{:rel=>"stylesheet", :href=>"/jm/css/jqm.css"}
+    %link{:rel=>"stylesheet", :href=>"/jm/css/jqm_option.css"}
+    %script{:src=>"/jm/js/jquery-1.7.1.min.js"}
+    %script{:src=>"/jm/js/jquery.mobile-1.1.0.min.js"}
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body
+    .type-home{"data-role" => "page"}
+      %div{"data-role" => "content"}
+        = yield

@@ -1,0 +1,51 @@
+// Place all the styles related to the bookmarks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#bookmarks {
+
+#category {
+}
+
+#content {
+}
+
+/* title color */
+.navbar-fixed-top .brand {
+  color: #fff;
+}
+
+.match {
+  background: lightgreen;
+}
+
+/* overwrite main style */
+.help-block {
+  margin: 0;
+}
+
+/* count over */
+.over {
+  color: red;
+}
+
+ul {
+}
+
+li {
+  display: inline-block;
+  margin: 5px;
+}
+
+/* sub category form */
+.category_form {
+  padding-left: 30px;
+}
+
+/* link */
+a.link {
+  //color: blue;
+  //text-decoration: underline;
+}
+
+}

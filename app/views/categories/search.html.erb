@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="span10">
+    <h2><%= "\"#{@title}\"の検索結果 (#{@leafNum})" %></h2>
+
+    <div class="row">
+      <div class="span10">
+        <%= header_ad %>
+      </div>
+    </div>
+
+    <div class="row">
+    <% if @categories.present? %>
+      <% mid = (@categories.count / 2).ceil %>
+
+      <div class="span5">
+        <ul class="nav nav-tabs nav-stacked">
+          <% @categories[0..mid - 1].each do |child| %>
+            <li>
+              <%= image_tag('/assets/categories/search_category@2x.png', :size => '16x16', :class => "icon") %>
+              <%= link_to child[:url_name] || child[:title], child[:url_name] ? child[:title] : { :action => :show, :id => child[:branch_id] } %>
+              <span class="leaf_num">(<%= child[:leaf_num] %>)</span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+      <% if mid > 0 %>
+      <div class="span5">
+        <ul class="nav nav-tabs nav-stacked">
+          <% @categories[mid..@categories.count - 1].each do |child| %>
+            <li>
+              <%= image_tag('/assets/categories/search_category@2x.png', :size => '16x16', :class => "icon") %>
+              <%= link_to child[:url_name] || child[:title], child[:url_name] ? child[:title] : { :action => :show, :id => child[:branch_id] } %>
+              <span class="leaf_num">(<%= child[:leaf_num] %>)</span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+
+    <% end %>
+    </div>
+
+  </div>
+</div>

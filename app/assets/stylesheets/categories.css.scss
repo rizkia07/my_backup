@@ -1,0 +1,50 @@
+// Place all the styles related to the categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body#categories {
+  padding-top: 10px;
+  background: url(/assets/categories/cream_dust.png);
+
+  a {
+    outline: none !important;
+    text-decoration: none !important;
+  }
+
+  .nav-stacked {
+    li {
+      position: relative;
+      text-indent: 2em;
+      .leaf_num { 
+        position: absolute;
+        right: 1em;
+        top: 0.5em;
+      }
+      .icon {
+        position: absolute;
+        left: 1em;
+        top: 0.7em;
+      }
+    }
+  }
+
+  .rights {
+    text-align: center;
+    padding: 20px 0;
+  }
+
+  .ad {
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  .icon {
+    vertical-align: baseline;
+    margin-right: 5px;
+  }
+
+  .js-iphone-link {
+    display: none;
+  }
+
+}

@@ -1,0 +1,228 @@
+- app_token = (@user.app_token ? @user.app_token : "null")
+- if false
+  -#- if @data[:lang_id] == 2 && @data[:tutorials]
+  %div{'data-role'=>"collapsible", 'data-theme'=>"b", 'data-content-theme'=>"b", 'data-collapsed'=>"false" }
+    - if @data[:lang_id] == 2
+      %h3 チュートリアル
+    - else
+      %h3 Tutorial
+    - @data[:tutorials].each do |tutorial|
+      %p.ui-body.ui-body-a{:style => "padding:10px;font-size:.8em;"}
+        - if @data[:lang_id] == 2
+          =render '/parts/' + tutorial[:title]+'_ja'
+        - else
+          =render '/parts/' + tutorial[:title]
+
+- if @data[:lang_id] == 2 && @data[:title_users] && @data[:title_users][0]
+  %div{'data-role'=>"collapsible", 'data-theme'=>"b", 'data-content-theme'=>"b", 'data-collapsed'=>"false"}
+    - if @data[:lang_id] == 2
+      %h3 おすすめキーワード
+    -else
+      %h3 Recommended Keywords
+
+    %div#title_users{"data-dividertheme" => "f", "data-role" => "listview", "data-theme" => "c"}
+      %p.ui-body.ui-body-a{:style => "padding:10px;font-size:.8em;"}
+        -@data[:title_users].each do |i|
+          %span{:style => "margin:3px;"}=" #{i} "
+        %div{:style=>"text-align:right; padding:5px;"}
+          %a{:align=>"right", :href => "/hots/updt_title_users?user_id=#{@user.id}&app_token=#{app_token}&lang_id=#{@user.lang_id}", :rel=>"external"}="clear"
+
+- if @data[:lang_id] == 2 && @data[:recent_betters] && @data[:recent_betters][0]
+  %div{'data-role'=>"collapsible", 'data-theme'=>"b", 'data-content-theme'=>"b", 'data-collapsed'=>"false"}
+    - if @data[:lang_id] == 2
+      %h3 バトンのおすすめ移動先
+    -else
+      %h3 Recommended to move
+
+    %div#recent_betters{"data-dividertheme" => "f", "data-role" => "listview", "data-theme" => "c"}
+      -@data[:recent_betters].each do |i|
+        %p.ui-body.ui-body-a{:style => "padding:10px;font-size:.8em;"}
+          ="「"
+          %a{:href => "baton://show/#{i[:parent_id]}/#{URI.encode(i[:parent_title])}/"} #{i[:parent_title]}
+          ="」にある「#{i[:title]}」は「"
+          %a{:href => "baton://show/#{i[:better_parent_id]}/#{URI.encode(i[:better_parent_title])}/"} #{i[:better_parent_title]}
+          ="」に移動されることが多いようです。"
+
+        %div{:style=>"text-align:right; padding:5px;"}
+          %a{:href => "/hots/move?branch_id=#{i[:branch_id]}&parent_id=#{i[:better_parent_id]}&user_id=#{@user.id}&app_token=#{app_token}", :rel=>"external"}="移動する"
+
+
+
+- if @data[:home]
+  %div{'data-role'=>"collapsible", 'data-theme'=>"b", 'data-content-theme'=>"b", 'data-collapsed'=>"false" }
+    - if @data[:lang_id] == 2
+      %h3 ディレクトリー
+    - else
+      %h3 directory
+    %ul#home{"data-dividertheme" => "f", "data-role" => "listview", "data-theme" => "c"}
+
+- if false
+  %div{'data-role'=>"collapsible", 'data-theme'=>"b", 'data-content-theme'=>"b", 'data-collapsed'=>"false"}
+    - if @data[:lang_id] == 2
+      %h3 120文字本文が書かれたバトン
+    -else
+      %h3 batons that written within 120 characters
+
+    %ul#territory_outs{"data-dividertheme" => "f", "data-role" => "listview", "data-theme" => "c"}
+      -@data[:territory_outs].each do |i|
+        %li
+          %a{'data-id' => i[:branch_id], :href => "baton://show/#{i[:branch_id]}/#{URI.encode(i[:title])}/"} #{i[:title]}
+
+- if @data[:territories]
+  %div{'data-role'=>"collapsible", 'data-theme'=>"b", 'data-content-theme'=>"b"}
+    - if @data[:lang_id] == 2
+      %h3 チェック済バトン
+    - else
+      %h3 checked
+
+    %ul#territories{"data-dividertheme" => "f", "data-role" => "listview", "data-theme" => "c"}
+      -@data[:territories].each do |i|
+        %li
+          %a{'data-id' => i[:branch_id], :href => "baton://show/#{i[:branch_id]}/#{URI.encode(i[:title])}/"} #{i[:title]}
+
+%div{'data-role'=>"collapsible", 'data-theme'=>"b", 'data-content-theme'=>"b", 'data-collapsed'=>"false"}
+  - if @data[:lang_id] == 2
+    %h3 チェックしていないバトン
+  -else
+    %h3 unchecked
+
+  %ul#territory_outs{"data-dividertheme" => "f", "data-role" => "listview", "data-theme" => "c"}
+    -@data[:territory_outs].each do |i|
+      %li
+        %a{'data-id' => i[:branch_id], :href => "baton://show/#{i[:branch_id]}/#{URI.encode(i[:title])}/"} #{i[:title]}
+
+
+- if @data[:themes] && @data[:themes][0] && @data[:lang_id] == 2
+  %div{'data-role'=>"collapsible", 'data-theme'=>"b", 'data-content-theme'=>"b", 'data-collapsed'=>"false"}
+    - if @data[:lang_id] == 2
+      %h3 本日のお題
+    -else
+      %h3 today's theme
+
+    %ul#themes{"data-dividertheme" => "f", "data-role" => "listview", "data-theme" => "c"}
+      -@data[:themes].each do |branch|
+        - title = branch.title.name
+        - title += "(#{branch.parent.title.name})" if branch.parent.parent_id != 0
+        %li
+          %a{'data-id' => branch.id, :href => "baton://show/#{branch.id}/#{URI.encode(title)}/"} #{title}
+
+-if false
+  - if !@data[:canceled].blank?
+    %div{'data-role'=>"collapsible", 'data-theme'=>"b", 'data-content-theme'=>"b"}
+      - if @data[:lang_id] == 2
+        %h3 最近チェックを外したバトン
+      -else
+        %h3 recent canceled baton
+
+      %ul#canceled{"data-dividertheme" => "f", "data-role" => "listview", "data-theme" => "c"}
+        -@data[:canceled].each do |branch|
+          - title = branch.title.name
+          - title += "(#{branch.parent.title.name})" if branch.parent.parent_id != 0
+          %li
+            %a{'data-id' => branch.id, :href => "baton://show/#{branch.id}/#{URI.encode(title)}/"} #{title}
+
+- if false
+  -@part = {:titles => {"en" => "Check Increase Report (You/All)", "ja" => "チェック増加数（個人/全体）"}, :data => @data[:report_check], :key => "check_user"}
+  =render "/parts/hot_item"
+
+  -@part = {:titles => {"en" => "Baton Increase Report (You/All)", "ja" => "バトン増加数（個人/全体）"}, :data => @data[:report_baton], :key => "baton_user"}
+  =render "/parts/hot_item"
+
+  -@part = {:titles => {"en" => "Access Report (You/All)", "ja" => "アクセス増加数（個人/全体）"}, :data => @data[:report_log_access], :key => "log_access_user"}
+  =render "/parts/hot_item"
+
+  -@part = {:titles => {"en" => "Users Report(English/All)", "ja" => "利用者増加数 (日本語/全体)"}, :data => @data[:report_user], :key => "user_all"}
+  =render "/parts/hot_item"
+
+%div{'data-role'=>"collapsible", 'data-theme'=>"b", 'data-content-theme'=>"b", 'data-collapsed'=>"false"}
+  - if @data[:lang_id] == 2
+    %h3 ご意見お待ちしております！
+    -sub = "送信"
+  -else
+    %h3 Please Give Your Feedback !
+    -sub = "submit"
+
+  %div#inquiry{"data-dividertheme" => "f", "data-role" => "listview", "data-theme" => "c"}
+    %p.form.ui-body.ui-body-a{:style => "padding:10px;font-size:.8em;"}
+      %textarea{:name => "text"}
+      %input{:type => "submit", :value => "#{sub}", :id => "inquiry_submit"}
+    %p.sending.ui-body.ui-body-a{:style => "padding:10px;font-size:.8em; display:none;"}
+      ="送信"
+
+:javascript
+  $("#inquiry_submit").click(function(){
+    $('#inquiry .form').css('display', 'none');
+    $('#inquiry .sending').css('display', 'block');
+    var data = {
+      text: $('#inquiry p textarea').val(),
+      user_id: "#{@user.id}",
+      app_token: "#{app_token}"
+    }
+    $.post('/inquiries', data, function(data){
+      alert('ご意見ありがとうございます！');
+      $('#inquiry p textarea').val("");
+      $('#inquiry .form').css('display', 'block');
+      $('#inquiry .sending').css('display', 'none');
+    });
+  });
+
+-if @data[:home] && @data[:lang_id] == 2
+  :javascript
+    function move(id){
+      $.get('/words/' + id, function(data){
+        var val = "";
+        if(typeof(data.breadcrumbs[1]) != "undefined"){
+          var item = data.breadcrumbs[1];
+          val += '<li data-id="'+item.branch_id+'"><a>戻る</a></li>';
+        }else if(typeof(data.breadcrumbs[0]) != "undefined"){
+          val += '<li data-id="2"><a>戻る</a></li>';
+        }
+        for(var i = 0; i < data.children.length; i++){
+          var item = data.children[i];
+          val += '<li data-id="'+item.branch_id+'"><a>'+item.title+'</a></li>'
+        }
+        $("#home").html(val);
+        $("#home").listview("refresh");
+        $("#home li,#territory li, #territories li").click(function(){
+          move($(this).attr('data-id'));
+          return false;
+        });
+      });
+    }
+    move(2)
+    
+- if @data[:lang_id] == 2 && @data[:recent_betters]
+  - app_token = (@user.app_token ? @user.app_token : "null")
+  :javascript
+
+    $("a.recent_betters").click(function(){
+      var $p = $($(this).parents()[0]);
+      var id = $(this).attr('data-id');
+      var parent_id = $(this).attr('data-better_parent_id');
+      var data = {
+        _method: "put",
+        words:{
+          parent_id: parent_id,
+          app_token: #{app_token},
+          user_id: #{@user.id}
+        }
+      };
+      $.ajax({
+        /*
+          url: '/words/' + id,
+          type: "POST",
+          data: data,
+        */
+          url: '/hots/move?branch_id=' + id + '&parent_id=' + parent_id + '&user_id=#{@user.id}&app_token=#{app_token}',
+          type: "GET",
+
+          success: function(data){
+            $p.css('display', 'none');
+            $("#recent_betters").listview("refresh");
+          },
+      });
+      return false;
+    });
+
+- if @data[:home]
+  =render "amazon"

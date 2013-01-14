@@ -1,0 +1,12 @@
+- if @user
+  %input#new_input
+  %textarea#new_textarea
+  %ul.breadcrumb
+  %h1#title
+  %header.jumbotron.masthead
+    %ul#words.row
+  #user_id{"data-user_id"=>"#{@user.id}"}
+- else
+  %a{:href=>"/auth/twitter"}="login"
+
+
